@@ -33,7 +33,7 @@
     {
       "name": "enableTimeout",
       "type": "checkbox",
-      "default": true,
+      "default": false,
       "title": "Auto-Reset Timeout",
       "description": "Automatically reset to root menu after a period of inactivity",
       "label": "Enable timeout",
