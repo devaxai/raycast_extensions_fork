@@ -52,11 +52,7 @@ export async function executeAction(
 }
 
 async function openApp(appPath: string): Promise<void> {
-  if (appPath.endsWith(".app")) {
-    await execAsync(`open "${appPath}"`);
-  } else {
-    await execAsync(`open -a "${appPath}"`);
-  }
+  await open(appPath);
 }
 
 async function openUrl(url: string): Promise<void> {
