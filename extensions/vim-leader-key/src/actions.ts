@@ -60,7 +60,7 @@ async function openUrl(url: string): Promise<void> {
 }
 
 async function openFolder(folderPath: string): Promise<void> {
-  await execAsync(`open "${folderPath}"`);
+  await open(folderPath);
 }
 
 async function runCommand(command: string): Promise<void> {
