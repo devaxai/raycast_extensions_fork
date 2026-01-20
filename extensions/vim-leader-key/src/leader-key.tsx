@@ -35,10 +35,9 @@ interface SearchResult {
   matchedOn: "label" | "value" | "key";
 }
 
-interface Preferences {
-  enableTimeout: boolean;
-  timeoutSeconds: string;
-}
+import { getPreferenceValues } from "@raycast/api";
+
+const prefs = getPreferenceValues<Preferences>();
 
 function getTimeoutMs(): number | null {
   const prefs = getPreferenceValues<Preferences>();
