@@ -1,5 +1,5 @@
 # Changelog
 
-## [Initial Version] - 2026-01-12
+## [Initial Version] - {PR_MERGE_DATE}
 
 - Initial release of Vim Leader Key extension
