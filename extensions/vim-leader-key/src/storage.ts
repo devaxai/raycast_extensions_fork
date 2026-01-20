@@ -416,4 +416,3 @@ export async function exportConfigToJson(): Promise<string> {
   const external = exportLeaderKeyConfig(config);
   return JSON.stringify(external, null, 2);
 }
-
