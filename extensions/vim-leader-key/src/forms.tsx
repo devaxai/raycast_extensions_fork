@@ -444,7 +444,7 @@ function getTargetConfig(actionType: ActionType): {
       return {
         title: "Folder Path",
         placeholder: "/path/to/folder or ~/Documents",
-        info: "The folder path to open in Finder",
+        info: "The folder path to open in file manager",
       };
     case "command":
       return {
