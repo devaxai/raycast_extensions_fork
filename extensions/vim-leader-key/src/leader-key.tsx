@@ -20,7 +20,13 @@ import {
   isGroup,
   Action as ActionItem,
 } from "./types";
-import { getConfig, saveConfig, deleteItem, findGroupByPath, resolveBrowser } from "./storage";
+import {
+  getConfig,
+  saveConfig,
+  deleteItem,
+  findGroupByPath,
+  resolveBrowser,
+} from "./storage";
 import { executeAction, getActionIcon } from "./actions";
 import { AddItemForm, EditItemForm } from "./forms";
 
@@ -245,9 +251,13 @@ export default function LeaderKey() {
             setCurrentPath(exactMatch.path);
           } else {
             const browser = resolveBrowser(config!, exactMatch.path);
-            executeAction(exactMatch.item as ActionItem, () => {
-              setCurrentPath([]);
-            }, browser);
+            executeAction(
+              exactMatch.item as ActionItem,
+              () => {
+                setCurrentPath([]);
+              },
+              browser,
+            );
           }
           return;
         }
@@ -282,11 +292,18 @@ export default function LeaderKey() {
             setCurrentPath([...currentPath, matchingItem.id]);
             setSearchText("");
           } else {
-            const browser = resolveBrowser(config!, [...currentPath, matchingItem.id]);
-            executeAction(matchingItem, () => {
-              setCurrentPath([]);
-              setSearchText("");
-            }, browser);
+            const browser = resolveBrowser(config!, [
+              ...currentPath,
+              matchingItem.id,
+            ]);
+            executeAction(
+              matchingItem,
+              () => {
+                setCurrentPath([]);
+                setSearchText("");
+              },
+              browser,
+            );
           }
         } else {
           setSearchText("");
@@ -356,21 +373,28 @@ export default function LeaderKey() {
     setSearchQuery("");
   }, []);
 
-  const handleExecuteConfirmedResult = useCallback((result: SearchResult) => {
-    setConfirmedResults([]);
-    setKeySequence("");
-    setSearchText("");
-    setSearchMode(false);
+  const handleExecuteConfirmedResult = useCallback(
+    (result: SearchResult) => {
+      setConfirmedResults([]);
+      setKeySequence("");
+      setSearchText("");
+      setSearchMode(false);
 
-    if (isGroup(result.item)) {
-      setCurrentPath(result.path);
-    } else {
-      const browser = resolveBrowser(config!, result.path);
-      executeAction(result.item as ActionItem, () => {
-        setCurrentPath([]);
-      }, browser);
-    }
-  }, [config]);
+      if (isGroup(result.item)) {
+        setCurrentPath(result.path);
+      } else {
+        const browser = resolveBrowser(config!, result.path);
+        executeAction(
+          result.item as ActionItem,
+          () => {
+            setCurrentPath([]);
+          },
+          browser,
+        );
+      }
+    },
+    [config],
+  );
 
   const handleSelectSearchResult = useCallback((result: SearchResult) => {
     setSearchMode(false);
@@ -533,11 +557,18 @@ export default function LeaderKey() {
                   setCurrentPath([...currentPath, item.id]);
                   setSearchText("");
                 } else {
-                  const browser = resolveBrowser(config!, [...currentPath, item.id]);
-                  executeAction(item, () => {
-                    setCurrentPath([]);
-                    setSearchText("");
-                  }, browser);
+                  const browser = resolveBrowser(config!, [
+                    ...currentPath,
+                    item.id,
+                  ]);
+                  executeAction(
+                    item,
+                    () => {
+                      setCurrentPath([]);
+                      setSearchText("");
+                    },
+                    browser,
+                  );
                 }
               }}
               onGoBack={currentPath.length > 0 ? handleGoBack : undefined}

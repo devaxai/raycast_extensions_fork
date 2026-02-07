@@ -174,7 +174,11 @@ export function AddItemForm({
             title="Default Browser"
             info="URLs in this group will open with this browser unless overridden by the individual action"
           >
-            <Form.Dropdown.Item value="" title="System Default" icon={Icon.Globe} />
+            <Form.Dropdown.Item
+              value=""
+              title="System Default"
+              icon={Icon.Globe}
+            />
             {applications.map((app) => (
               <Form.Dropdown.Item
                 key={app.bundleId || app.path}
@@ -248,7 +252,11 @@ export function AddItemForm({
               title="Open With"
               info="Choose which browser to open this URL with. System Default inherits from the parent group or OS default."
             >
-              <Form.Dropdown.Item value="" title="System Default" icon={Icon.Globe} />
+              <Form.Dropdown.Item
+                value=""
+                title="System Default"
+                icon={Icon.Globe}
+              />
               {applications.map((app) => (
                 <Form.Dropdown.Item
                   key={app.bundleId || app.path}
@@ -417,7 +425,11 @@ export function EditItemForm({ config, itemPath, onSave }: EditItemFormProps) {
             defaultValue={(item as Group).browser || ""}
             info="URLs in this group will open with this browser unless overridden by the individual action"
           >
-            <Form.Dropdown.Item value="" title="System Default" icon={Icon.Globe} />
+            <Form.Dropdown.Item
+              value=""
+              title="System Default"
+              icon={Icon.Globe}
+            />
             {applications.map((app) => (
               <Form.Dropdown.Item
                 key={app.bundleId || app.path}
@@ -494,7 +506,11 @@ export function EditItemForm({ config, itemPath, onSave }: EditItemFormProps) {
               defaultValue={(item as ActionItem).browser || ""}
               info="Choose which browser to open this URL with. System Default inherits from the parent group or OS default."
             >
-              <Form.Dropdown.Item value="" title="System Default" icon={Icon.Globe} />
+              <Form.Dropdown.Item
+                value=""
+                title="System Default"
+                icon={Icon.Globe}
+              />
               {applications.map((app) => (
                 <Form.Dropdown.Item
                   key={app.bundleId || app.path}

@@ -16,8 +16,7 @@ const CURRENT_VERSION = 1;
 
 type Platform = "mac" | "windows";
 
-const platform: Platform =
-  process.platform === "win32" ? "windows" : "mac";
+const platform: Platform = process.platform === "win32" ? "windows" : "mac";
 
 const platformApps = {
   mac: {
