@@ -244,6 +244,26 @@ export function findItemByPath(
   return parent.actions.find((a) => a.id === itemId) || null;
 }
 
+export function resolveBrowser(
+  config: RootConfig,
+  actionPath: string[],
+): string | undefined {
+  const item = findItemByPath(config, actionPath);
+  if (item && !isGroup(item) && item.browser) {
+    return item.browser;
+  }
+
+  for (let i = actionPath.length - 1; i >= 1; i--) {
+    const ancestorPath = actionPath.slice(0, i);
+    const ancestor = findItemByPath(config, ancestorPath);
+    if (ancestor && isGroup(ancestor) && ancestor.browser) {
+      return ancestor.browser;
+    }
+  }
+
+  return undefined;
+}
+
 export function generateId(): string {
   return Date.now().toString(36) + Math.random().toString(36).slice(2);
 }
@@ -365,6 +385,7 @@ export interface LeaderKeyAction {
   type: "application" | "url" | "folder" | "command";
   value: string;
   label?: string;
+  browser?: string;
 }
 
 export interface LeaderKeyGroup {
@@ -372,6 +393,7 @@ export interface LeaderKeyGroup {
   type: "group";
   label?: string;
   actions: LeaderKeyItem[];
+  browser?: string;
 }
 
 export type LeaderKeyItem = LeaderKeyAction | LeaderKeyGroup;
@@ -398,6 +420,7 @@ export function importLeaderKeyConfig(external: LeaderKeyConfig): RootConfig {
         actions: group.actions.map((child) =>
           convertItem(child, prefix + group.key),
         ),
+        ...(group.browser ? { browser: group.browser } : {}),
       } as Group;
     } else {
       const action = item as LeaderKeyAction;
@@ -407,6 +430,7 @@ export function importLeaderKeyConfig(external: LeaderKeyConfig): RootConfig {
         type: action.type,
         label: action.label,
         value: action.value,
+        ...(action.browser ? { browser: action.browser } : {}),
       } as Action;
     }
   }
@@ -428,6 +452,9 @@ export function exportLeaderKeyConfig(config: RootConfig): LeaderKeyConfig {
       if (item.label) {
         result.label = item.label;
       }
+      if (item.browser) {
+        result.browser = item.browser;
+      }
       return result;
     } else {
       const action = item as Action;
@@ -438,6 +465,9 @@ export function exportLeaderKeyConfig(config: RootConfig): LeaderKeyConfig {
       };
       if (action.label) {
         result.label = action.label;
+      }
+      if (action.browser) {
+        result.browser = action.browser;
       }
       return result;
     }
