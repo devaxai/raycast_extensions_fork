@@ -57,7 +57,7 @@ async function openApp(appPath: string): Promise<void> {
 }
 
 async function openUrl(url: string, browser?: string): Promise<void> {
-  if (browser) {
+  if (browser && !url.startsWith("raycast://")) {
     await open(url, browser);
   } else {
     await open(url);
