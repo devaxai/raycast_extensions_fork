@@ -1,6 +1,6 @@
 # Changelog
 
-## [Update] - {PR_MERGE_DATE}
+## [Update] - 2026-02-09
 
 - Added Windows platform support
 - Added browser selection for URL actions (per-action and group-level)
